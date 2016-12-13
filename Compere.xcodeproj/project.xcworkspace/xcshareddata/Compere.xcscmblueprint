@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8BC8C14EDF4EB406B71CC9C3AC02BDEEE8BF26A6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8BC8C14EDF4EB406B71CC9C3AC02BDEEE8BF26A6" : 9223372036854775807,
+    "56084CCA8858408CE2C30466B317BE858FFA8DD8" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3326575C-AC75-41FC-A01A-D85670EB661C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8BC8C14EDF4EB406B71CC9C3AC02BDEEE8BF26A6" : "Compere\/",
+    "56084CCA8858408CE2C30466B317BE858FFA8DD8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Compere",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Compere.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Kimi-Ng\/compere.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "56084CCA8858408CE2C30466B317BE858FFA8DD8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Kimi-Ng\/Compere.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8BC8C14EDF4EB406B71CC9C3AC02BDEEE8BF26A6"
+    }
+  ]
+}

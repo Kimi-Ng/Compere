@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentViewController">
             <connections>
+                <outlet property="collectionView" destination="IgL-RC-uCN" id="6MA-D2-RFJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,24 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IgL-RC-uCN">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AzZ-Yw-rJ6">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="IgL-RC-uCN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5ej-HS-DUA"/>
+                <constraint firstAttribute="trailing" secondItem="IgL-RC-uCN" secondAttribute="trailing" id="Ml4-aR-zlw"/>
+                <constraint firstItem="IgL-RC-uCN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="n0S-Rj-4NC"/>
+                <constraint firstAttribute="bottom" secondItem="IgL-RC-uCN" secondAttribute="bottom" id="oT7-6r-9mn"/>
+            </constraints>
         </view>
     </objects>
 </document>

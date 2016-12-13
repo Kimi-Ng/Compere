@@ -1,26 +1,26 @@
 //
-//  CommentViewController.m
+//  QuestionSectionCell.m
 //  Compere
 //
-//  Created by Kimi Wu on 12/13/16.
+//  Created by Kimi Wu on 12/14/16.
 //  Copyright © 2016 Kimi Wu. All rights reserved.
 //
 
-#import "CommentViewController.h"
-#import "MessageCollectionViewCell.h"
+#import "QuestionSectionCell.h"
 #import "ViewConstants.h"
+#import "MessageCollectionViewCell.h"
 
-@interface CommentViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface QuestionSectionCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) NSArray *commentDataArray;
+@property (strong, nonatomic) UIColor *cellBackgroundColor;
 @end
 
-@implementation CommentViewController
+@implementation QuestionSectionCell
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+- (void)awakeFromNib {
+    [super awakeFromNib];
     [self setUpCollectionView];
+    // Initialization code
 }
 
 - (void)setUpCollectionView
@@ -28,11 +28,6 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     [self.collectionView registerNib:[UINib nibWithNibName:kMessageCollectionViewCellIdentifier bundle:nil] forCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -48,6 +43,9 @@
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier forIndexPath:indexPath];
+    if (self.cellBackgroundColor) {
+        [cell setBackgroundColor:self.cellBackgroundColor];
+    }
     
     return cell;
 }
@@ -56,6 +54,13 @@
 {
     return [MessageCollectionViewCell cellDefaultSize];
     //return CGSizeZero;
+}
+
+- (void)setSectionBackgroundColor:(UIColor *)bgColor
+{
+    self.cellBackgroundColor = bgColor;
+    self.collectionView.backgroundColor = bgColor;
+    //[self.collectionView reloadData];
 }
 
 
