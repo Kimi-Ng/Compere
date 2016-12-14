@@ -19,23 +19,58 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvw-dO-0rx">
-                        <rect key="frame" x="8" y="8" width="359" height="21"/>
+                        <rect key="frame" x="8" y="8" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ua1-RY-4aI">
+                        <rect key="frame" x="340" y="4" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="EFC-nL-7zn"/>
+                            <constraint firstAttribute="width" constant="30" id="WnB-1z-0nO"/>
+                        </constraints>
+                        <state key="normal" image="share-icon"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KU-gg-wG1">
+                        <rect key="frame" x="301" y="4" width="35" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="G0y-Mh-Gb9"/>
+                            <constraint firstAttribute="height" constant="30" id="Ur3-Hj-TYr"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Ua1-RY-4aI" firstAttribute="leading" secondItem="2KU-gg-wG1" secondAttribute="trailing" constant="4" id="7Qc-O8-yrZ"/>
                 <constraint firstItem="hvw-dO-0rx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="LXr-RG-AW2"/>
+                <constraint firstItem="2KU-gg-wG1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="NDg-fX-Vtx"/>
+                <constraint firstItem="2KU-gg-wG1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hvw-dO-0rx" secondAttribute="trailing" id="Ofl-Y7-TDQ"/>
                 <constraint firstItem="hvw-dO-0rx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="RhS-VF-iEx"/>
-                <constraint firstAttribute="trailing" secondItem="hvw-dO-0rx" secondAttribute="trailing" constant="8" id="SAI-gT-ln4"/>
+                <constraint firstAttribute="bottom" secondItem="2KU-gg-wG1" secondAttribute="bottom" constant="4" id="dAc-I8-nBu"/>
+                <constraint firstItem="Ua1-RY-4aI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="enP-Dw-Oqv"/>
+                <constraint firstAttribute="trailing" secondItem="Ua1-RY-4aI" secondAttribute="trailing" constant="5" id="k9E-fF-oMP"/>
+                <constraint firstAttribute="bottom" secondItem="Ua1-RY-4aI" secondAttribute="bottom" constant="4" id="nyd-CT-0LD"/>
             </constraints>
             <connections>
+                <outlet property="shareButton" destination="Ua1-RY-4aI" id="wG5-kl-r9W"/>
                 <outlet property="suggestionLabel" destination="hvw-dO-0rx" id="ObF-eY-CA1"/>
+                <outlet property="voteButton" destination="2KU-gg-wG1" id="QFC-dh-H89"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="82"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="share-icon" width="40" height="40"/>
+    </resources>
 </document>

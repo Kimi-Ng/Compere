@@ -12,7 +12,7 @@
 
 // TODO: populate the properties from json string
 
-- (instancetype)initWithAuthor:(NSString *)author content:(NSString *)content isQuestion:(BOOL)isQuestion voteScore:(NSString *)voteScore textId:(NSUInteger)textId
+- (instancetype)initWithAuthor:(NSString *)author content:(NSString *)content isQuestion:(BOOL)isQuestion voteScore:(NSString *)voteScore textId:(NSString *)textId
 {
     self = [super init];
     if (self) {

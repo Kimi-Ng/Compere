@@ -8,6 +8,12 @@
 
 #import "SuggestionCollectionViewCell.h"
 
+@interface SuggestionCollectionViewCell ()
+@property (weak, nonatomic) IBOutlet UIButton *voteButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
+@end
+
 @implementation SuggestionCollectionViewCell
 
 + (NSString*)cellReuseIdentifier

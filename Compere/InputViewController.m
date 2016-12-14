@@ -49,7 +49,7 @@ UICollectionViewDelegateFlowLayout
     NSString *text = self.textField.text;
     if (text && text.length) {
         if (self.delegate) {
-            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@""];
+            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@"" textId:@""];
             [self.delegate onUserPostMessage:message];
         }
         //TODO: api call to post text

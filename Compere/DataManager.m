@@ -40,7 +40,7 @@
         
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] stringValue]];
             [self.allContentMockDataList addObject:dataObject];
         }
         if (completion) {
@@ -63,7 +63,7 @@
         
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] stringValue]];
             [self.recentQuestionMockDataList addObject:dataObject];
         }
         if (completion) {
@@ -86,7 +86,7 @@
         
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] stringValue]];
             [self.topQuestionMockDataList addObject:dataObject];
         }
         if (completion) {
@@ -155,17 +155,17 @@
     self.topQuestionMockDataList = [[NSMutableArray alloc] initWithCapacity:topQuestionList.count];
     for (int i=0;i<allContentList.count;i++){
         BOOL isQ = [allContentTypeList[i] isEqualToString:@"Q"];
-        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:allContentNameList[i] content:allContentList[i] isQuestion:isQ voteScore:allContentVoteScoreList[i]];
+        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:allContentNameList[i] content:allContentList[i] isQuestion:isQ voteScore:allContentVoteScoreList[i] textId:allContentVoteScoreList[i]];
         [self.allContentMockDataList addObject:dataObject];
     }
     
     for (int i=0;i<recentQuestionList.count;i++){
-        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:recentQuestionAuthorList[i] content:recentQuestionList[i] isQuestion:YES voteScore:recentQuestionScoreList[i]];
+        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:recentQuestionAuthorList[i] content:recentQuestionList[i] isQuestion:YES voteScore:recentQuestionScoreList[i] textId:recentQuestionList[i]];
         [self.recentQuestionMockDataList addObject:dataObject];
     }
     
     for (int i=0;i<topQuestionList.count;i++){
-        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:topQuestionAuthorList[i] content:topQuestionList[i] isQuestion:YES voteScore:topQuestionScoreList[i]];
+        MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:topQuestionAuthorList[i] content:topQuestionList[i] isQuestion:YES voteScore:topQuestionScoreList[i] textId:topQuestionList[i]];
         [self.topQuestionMockDataList addObject:dataObject];
     }
     
