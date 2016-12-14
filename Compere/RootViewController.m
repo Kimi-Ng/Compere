@@ -30,6 +30,7 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
     // Do any additional setup after loading the view.
     [self setUpVideoController];
     [self setUpTabBarController];
+    [self setUpInputView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +47,17 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
    [videoVC didMoveToParentViewController:self];
 }
 
+- (void)setUpInputView
+{
+    // TODO
+    // Use kInputViewHeight
+}
+
 - (void)setUpTabBarController
 {
 
     CustomTabBarViewController *tabBarController = [[CustomTabBarViewController alloc] initWithNibName:@"CustomTabBarViewController" bundle:nil];
-    [tabBarController.view setFrame:CGRectMake(0, kVideoHeight, kTabBarControllerWidth, kTabBarControllerHeight)];
+    [tabBarController.view setFrame:CGRectMake(0, kVideoHeight, kTabBarControllerWidth, kTabBarControllerHeight - kInputViewHeight)];
     [tabBarController setSelectedIndex:TabBarComment];
     [self addChildViewController:tabBarController];
     [self.view addSubview:tabBarController.view];

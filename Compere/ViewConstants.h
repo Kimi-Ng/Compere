@@ -22,5 +22,6 @@ typedef NS_ENUM(NSUInteger, TabBarType){
 #define kYahooDarkPurple @"#8300FF"
 #define kMessageCollectionViewCellIdentifier @"MessageCollectionViewCell"
 #define kQuestionSectionCellIdentifier @"QuestionSectionCell"
+#define kInputViewHeight 40
 
 @end
