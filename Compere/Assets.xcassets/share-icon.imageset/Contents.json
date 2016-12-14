@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "share_fb_circle.png",
+      "filename" : "sidebar-share-icon-highlighted.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "share_fb_circle@2x.png",
       "scale" : "2x"
     },
     {

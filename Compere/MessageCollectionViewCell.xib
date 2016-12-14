@@ -71,7 +71,7 @@
                             <constraint firstAttribute="height" constant="30" id="PyS-AE-kRO"/>
                             <constraint firstAttribute="width" constant="30" id="dsE-eY-6r9"/>
                         </constraints>
-                        <state key="normal" image="share-fb-icon">
+                        <state key="normal" image="share-icon">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -113,6 +113,6 @@
     </objects>
     <resources>
         <image name="guest-icon-1" width="158" height="158"/>
-        <image name="share-fb-icon" width="32" height="32"/>
+        <image name="share-icon" width="40" height="40"/>
     </resources>
 </document>

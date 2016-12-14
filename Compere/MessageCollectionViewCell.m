@@ -46,6 +46,9 @@
     self.shareButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
     [self.shareButton.titleLabel setTextColor:[UIColor colorWithHex:kYahooLightPurple]];
     [self.shareButton setTitleColor:[UIColor colorWithHex:kYahooDarkPurple] forState:UIControlStateNormal];
+    
+    UIImage *img = [self image:[UIImage imageNamed:@"share-icon"] replaceColor:[UIColor colorWithHex:kYahooLightPurple]];
+    [self.shareButton setImage:img forState:UIControlStateNormal];
 }
 
 - (void)populateCellWithData:(MessageDataObject *)data
@@ -88,6 +91,27 @@
 
 - (IBAction)didTapOnShareButton:(id)sender {
     NSLog(@"s");
+}
+
+
+- (UIImage *)image:(UIImage *)image replaceColor:(UIColor *)color
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    [color setFill];
+    CGContextTranslateCTM(contextRef, 0.0f, image.size.height);
+    CGContextScaleCTM(contextRef, 1.0f,  -1.0f);
+    CGRect drawRect = CGRectMake(0.0f, 0.0f, image.size.width, image.size.height);
+    CGContextDrawImage(contextRef, drawRect, image.CGImage);
+    CGContextClipToMask(contextRef, drawRect, image.CGImage);
+    CGContextAddRect(contextRef, drawRect);
+    CGContextDrawPath(contextRef, kCGPathFill);
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //keep original scale and orientation property
+    return [UIImage imageWithCGImage:[resultImage CGImage] scale:image.scale orientation:image.imageOrientation];
 }
 
 @end
