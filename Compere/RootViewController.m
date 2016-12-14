@@ -25,6 +25,8 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
 @interface RootViewController () <InputViewControllerProtocol>
 @property (strong, nonatomic) CustomTabBarViewController *tabBarController;
 @property (strong, nonatomic) InputViewController *anInputViewController;
+@property (strong, nonatomic) VideoViewController *videoController;
+
 @end
 
 @implementation RootViewController
@@ -76,6 +78,7 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
 - (void)setUpVideoController
 {
    VideoViewController *videoVC = [[VideoViewController alloc] initWithNibName:@"VideoViewController" bundle:nil];
+   self.videoController = videoVC;
    [videoVC.view setFrame:CGRectMake(0, 0, kVideoWidth, kVideoHeight)];
    [self addChildViewController:videoVC];
    [self.view addSubview:videoVC.view];
