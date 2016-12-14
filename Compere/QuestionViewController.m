@@ -58,21 +58,11 @@ static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHotCellIdentifier forIndexPath:indexPath];
             [((QuestionSectionCell *)cell) populateCellWithDataList:[DataManager sharedInstance].topQuestionMockDataList];
             
-            if (!cell) {
-                //init cell?
-                //cell = [MessageCollectionViewCell alloc] initw
-            }
             break;
         case 1: // recent questions
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kRecentCellIdentifier forIndexPath:indexPath];
-            [(QuestionSectionCell *)cell setSectionBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
             [((QuestionSectionCell *)cell) populateCellWithDataList:[DataManager sharedInstance].recentQuestionMockDataList];
-            
-            if (!cell) {
-                //init cell?
-                
-                
-            }
+            [(QuestionSectionCell *)cell setSectionBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1]];
             break;
         default:
             cell = nil;

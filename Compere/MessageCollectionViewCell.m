@@ -42,9 +42,9 @@
     self.avatarImageView.layer.cornerRadius = 20;
     self.avatarImageView.clipsToBounds = YES;
     self.voteButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
-    [self.voteButton setTitleColor:[UIColor colorWithHex:kYahooDarkPurple] forState:UIControlStateNormal];
+    [self.voteButton setTitleColor:[UIColor colorWithHex:kYahooLightPurple] forState:UIControlStateNormal];
     self.shareButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
-    [self.shareButton.titleLabel setTextColor:[UIColor colorWithHex:kYahooDarkPurple]];
+    [self.shareButton.titleLabel setTextColor:[UIColor colorWithHex:kYahooLightPurple]];
     [self.shareButton setTitleColor:[UIColor colorWithHex:kYahooDarkPurple] forState:UIControlStateNormal];
 }
 

@@ -14,7 +14,8 @@ typedef NS_ENUM(NSUInteger, TabBarType){
 };
 
 #define kVideoWidth [UIScreen mainScreen].bounds.size.width
-#define kVideoHeight [UIScreen mainScreen].bounds.size.width/2
+#define kVideoHeight 170
+//[UIScreen mainScreen].bounds.size.width/2 - 17
 #define kTabBarControllerWidth [UIScreen mainScreen].bounds.size.width
 #define kTabBarControllerHeight [UIScreen mainScreen].bounds.size.height - kVideoHeight
 #define kTabBarHeight 35

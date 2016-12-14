@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITabBarItem *questionBarItem; // tag = 1
 @property (strong, nonatomic) UIViewController *commentViewController;
 @property (strong, nonatomic) UIViewController *questionViewController;
+@property (strong, nonatomic) UIView *bottomView;
 
 @end
 
@@ -35,7 +36,15 @@
     [self setChildViewController:questionVC];
     
     [self setUpTabBar];
+    [self setUpBottomView];
 
+}
+
+- (void)setUpBottomView
+{
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.tabBar.frame)-5, CGRectGetWidth(self.tabBar.frame)/2, 5)];
+    [self.bottomView setBackgroundColor:[UIColor colorWithHex:kYahooDarkPurple]];
+    [self.tabBar addSubview:self.bottomView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +55,7 @@
 {
     self.tabBar.delegate = self;
     [UITabBar appearance].barTintColor = [UIColor colorWithHex:kYahooLightPurple];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"AmericanTypewriter" size:18.0f], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:15.0f], NSFontAttributeName, nil] forState:UIControlStateNormal];
     // Add separator
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.tabBar.bounds)/2, 0, 1, CGRectGetHeight(self.tabBar.bounds))];
     [separator setBackgroundColor:[UIColor whiteColor]];
@@ -80,26 +89,28 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     switch (item.tag) {
-        case 0: // comment
+        case 0:{ // comment
+            //[API] get data for comment and reload UI
+            //[API] get sentiment data
             [self setChildViewController:self.commentViewController];
             [self.questionViewController removeFromParentViewController];
+            CGRect frame = self.bottomView.frame;
+            [self.bottomView setFrame:CGRectMake(0, CGRectGetHeight(self.tabBar.frame)-5, CGRectGetWidth(frame), CGRectGetHeight(frame))];
             break;
-        case 1: // question
+            }
+        case 1:{ // question
+            //[API] get data for top and recent question and reload UI
+            //[API] get sentiment data
             [self setChildViewController:self.questionViewController];
             [self.commentViewController removeFromParentViewController];
+            CGRect frame = self.bottomView.frame;
+            [self.bottomView setFrame:CGRectMake(CGRectGetWidth(frame), CGRectGetHeight(self.tabBar.frame)-5, CGRectGetWidth(frame), CGRectGetHeight(frame))];
             break;
+            }
         default:
             break;
     }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

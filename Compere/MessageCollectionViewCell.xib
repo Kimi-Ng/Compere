@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guest-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="5el-cg-Fir" userLabel="avatarImageView">
-                        <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                        <rect key="frame" x="5" y="3" width="34" height="34"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="38t-ou-bIK"/>
-                            <constraint firstAttribute="height" constant="40" id="gkv-xP-LGY"/>
+                            <constraint firstAttribute="width" constant="34" id="38t-ou-bIK"/>
+                            <constraint firstAttribute="height" constant="34" id="gkv-xP-LGY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kimi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T58-cu-68u">
-                        <rect key="frame" x="50" y="0.0" width="32" height="20"/>
+                        <rect key="frame" x="44" y="0.0" width="32" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7m0-bt-8nA"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where did you buy that hat?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKY-WS-rop">
-                        <rect key="frame" x="50" y="20" width="194" height="20"/>
+                        <rect key="frame" x="44" y="20" width="194" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7ai-NM-WZB"/>
                         </constraints>
@@ -98,7 +98,7 @@
                 <constraint firstAttribute="bottom" secondItem="z0z-3j-WLJ" secondAttribute="bottom" constant="5" id="a3F-Oo-w9z"/>
                 <constraint firstAttribute="bottom" secondItem="MUa-hK-jgE" secondAttribute="bottom" constant="5" id="l7D-OH-5jk"/>
                 <constraint firstItem="NKY-WS-rop" firstAttribute="leading" secondItem="5el-cg-Fir" secondAttribute="trailing" constant="5" id="nWy-yQ-dDM"/>
-                <constraint firstItem="5el-cg-Fir" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nk6-2i-sO0"/>
+                <constraint firstItem="5el-cg-Fir" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="nk6-2i-sO0"/>
                 <constraint firstItem="T58-cu-68u" firstAttribute="leading" secondItem="5el-cg-Fir" secondAttribute="trailing" constant="5" id="ulv-Ba-0g3"/>
                 <constraint firstItem="5el-cg-Fir" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="xTS-BQ-zZi"/>
             </constraints>

@@ -52,6 +52,9 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier forIndexPath:indexPath];
     [((MessageCollectionViewCell *)cell) populateCellWithData:[DataManager sharedInstance].allContentMockDataList[indexPath.row]];
+    if (((MessageDataObject *)[DataManager sharedInstance].allContentMockDataList[indexPath.row]).isQuestion) {
+            [(MessageCollectionViewCell *)cell setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1]];
+    }
     return cell;
 }
 

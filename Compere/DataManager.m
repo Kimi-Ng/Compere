@@ -91,9 +91,10 @@
     NSArray *recentQuestionScoreList = @[@"2", @"3"];
     
     // top question
-    NSArray *topQuestionList = @[@"How do I dress for a wedding?"];
-    NSArray *topQuestionScoreList = @[@"28"];
-    NSArray *topQuestionAuthorList = @[@"Dale"];
+    NSArray *topQuestionList = @[@"How do I dress for a wedding?",
+                                 @"Where to buy fashion shoes?"];
+    NSArray *topQuestionScoreList = @[@"28", @"26"];
+    NSArray *topQuestionAuthorList = @[@"Dale", @"Erin"];
     
     
     self.allContentMockDataList = [[NSMutableArray alloc] initWithCapacity:allContentList.count];
