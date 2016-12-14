@@ -7,7 +7,6 @@
 //
 
 #import "CustomTabBarViewController.h"
-#import "QuestionViewController.h"
 #import "ViewConstants.h"
 #import "UIColor+Utilities.h"
 
@@ -25,11 +24,10 @@
     [super viewDidLoad];
 
     self.commentViewController = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
-    QuestionViewController *questionVC = [[QuestionViewController alloc] initWithNibName:@"QuestionViewController" bundle:nil];
-    self.questionViewController = questionVC;
+    self.questionViewController = [[QuestionViewController alloc] initWithNibName:@"QuestionViewController" bundle:nil];
     
     [self setChildViewController:self.commentViewController];
-    [self setChildViewController:questionVC];
+    [self setChildViewController:self.questionViewController];
     
     [self setUpTabBar];
     [self setUpBottomView];
@@ -69,15 +67,19 @@
 - (void)setSelectedIndex:(TabBarType)tab
 {
     switch(tab) {
-            case TabBarQuestion:
-                [self setChildViewController:self.questionViewController];
-                [self.commentViewController removeFromParentViewController];
+        case TabBarQuestion:{
+            [self setChildViewController:self.questionViewController];
+            [self.commentViewController removeFromParentViewController];
+            [self.questionViewController refreshContentWithReload:YES];
             break;
-            case TabBarComment:
-                [self setChildViewController:self.commentViewController];
-                [self.questionViewController removeFromParentViewController];
-            default:
-            
+        }
+        case TabBarComment:{
+            [self setChildViewController:self.commentViewController];
+            [self.questionViewController removeFromParentViewController];
+            [self.commentViewController refreshContentWithReload:YES];
+            break;
+        }
+        default:
             break;
     }
 }
@@ -90,6 +92,7 @@
             //[API] get sentiment data
             [self setChildViewController:self.commentViewController];
             [self.questionViewController removeFromParentViewController];
+            [self.commentViewController refreshContentWithReload:YES];
             CGRect frame = self.bottomView.frame;
             [self.bottomView setFrame:CGRectMake(0, CGRectGetHeight(self.tabBar.frame)-5, CGRectGetWidth(frame), CGRectGetHeight(frame))];
             break;
@@ -99,6 +102,7 @@
             //[API] get sentiment data
             [self setChildViewController:self.questionViewController];
             [self.commentViewController removeFromParentViewController];
+            [self.questionViewController refreshContentWithReload:YES];
             CGRect frame = self.bottomView.frame;
             [self.bottomView setFrame:CGRectMake(CGRectGetWidth(frame), CGRectGetHeight(self.tabBar.frame)-5, CGRectGetWidth(frame), CGRectGetHeight(frame))];
             break;

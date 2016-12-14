@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *suggestionLabel;
 
 + (NSString*)cellReuseIdentifier;
+- (void)setVoteButtonScore:(NSString *)score;
 
 @end

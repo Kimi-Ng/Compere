@@ -10,6 +10,6 @@
 
 @interface CommentViewController : UIViewController
 
-- (void)refreshContent;
+- (void)refreshContentWithReload:(BOOL)reload;
 
 @end

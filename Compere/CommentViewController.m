@@ -14,6 +14,7 @@
 @interface CommentViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *commentDataArray;
+@property (nonatomic) NSUInteger currentCount;
 @end
 
 @implementation CommentViewController
@@ -23,18 +24,13 @@
     // Do any additional setup after loading the view from its nib.
     [self setUpCollectionView];
     //[[DataManager sharedInstance] applyMockData];
-    [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
-        [self.collectionView reloadData];
-    }];
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0
+                                     target:self
+                                   selector:@selector(regularIntervalReload)
+                                   userInfo:nil
+                                    repeats:YES];
 }
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
-//        [self.collectionView reloadData];
-//    }];
-//}
 
 - (void)setUpCollectionView
 {
@@ -76,9 +72,23 @@
     //return CGSizeZero;
 }
 
-- (void)refreshContent
+- (void)refreshContentWithReload:(BOOL)reload
 {
-    [self.collectionView reloadData];
+    if (reload) {
+        [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+            if (self.currentCount != dataArray.count) {
+                [self.collectionView reloadData];
+            }
+        }];
+    } else {
+        [self.collectionView reloadData];
+    }
+}
+
+- (void)regularIntervalReload
+{
+    self.currentCount = [DataManager sharedInstance].allContentMockDataList.count;
+    [self refreshContentWithReload:YES];
 }
 
 @end

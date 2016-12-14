@@ -24,7 +24,6 @@ static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpCollectionView];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +73,23 @@ static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), CGRectGetHeight(self.collectionView.bounds)/2);
+}
+
+- (void)refreshContentWithReload:(BOOL)reload
+{
+    if (reload) {
+//        [[DataManager sharedInstance] getRecentQuestionsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+//            [self.collectionView reloadData];
+//        }];
+//        [[DataManager sharedInstance] getTopQuestionsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+//            [self.collectionView reloadData];
+//        }];
+        [[DataManager sharedInstance] getTopAndRecentQuestionsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+            [self.collectionView reloadData];
+        }];
+    } else {
+        [self.collectionView reloadData];
+    }
 }
 
 @end

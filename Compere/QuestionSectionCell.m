@@ -40,6 +40,7 @@
 - (void)populateCellWithDataList:(NSArray *)dataList
 {
     self.dataList = dataList;
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
