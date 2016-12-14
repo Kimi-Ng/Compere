@@ -26,26 +26,75 @@
     return sharedInstance;
 }
 
-//- (void)postWithAuthor:(NSString *)author text:(NSString *)text
 
-- (void)getSth
+- (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
 {
-
-    NSString *requestUrlString = @"http://localhost:8080/all";// = [NSString stringWithFormat:@"%@?lang=%@&region=%@&device=ios&version=%@", APICardHomeBaseUrl, APILanguage, APIRegion, version];
-    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/all?author=%@", author];
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        NSLog(@">>>>>>%@", jsonDict);
-//        NSArray *widgetArray = jsonDict[@"widgets"][@"result"];
-//        
-//        for(NSDictionary *widget in widgetArray) {
-//        //parse the json
-//        }
+        //NSDictionary *jsonDict
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            [self.allContentMockDataList addObject:dataObject];
+        }
+        if (completion) {
+            completion(self.allContentMockDataList);
+        }
+        //RFC 3339 scheme for timestamp
     }
-    ] resume];
+      ] resume];
+}
 
+- (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
+{
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@", author];
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //NSDictionary *jsonDict
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            [self.recentQuestionMockDataList addObject:dataObject];
+        }
+        if (completion) {
+            completion(self.recentQuestionMockDataList);
+        }
+        //RFC 3339 scheme for timestamp
+    }
+      ] resume];
+}
+
+- (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
+{
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@", author];
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //NSDictionary *jsonDict
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:dict[@"score"] textId:[dict[@"id"] intValue]];
+            [self.topQuestionMockDataList addObject:dataObject];
+        }
+        if (completion) {
+            completion(self.topQuestionMockDataList);
+        }
+        //RFC 3339 scheme for timestamp
+    }
+      ] resume];
 }
 
 - (void)applyMockData

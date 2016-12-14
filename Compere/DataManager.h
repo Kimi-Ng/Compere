@@ -15,7 +15,12 @@
 @property (strong, nonatomic) NSMutableArray *topQuestionMockDataList;
 
 + (DataManager *)sharedInstance;
-- (void)getSth;
-- (void)applyMockData;
+
+- (void)applyMockData; // for testing
+
+
+- (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+- (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+- (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
 
 @end
