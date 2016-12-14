@@ -9,6 +9,7 @@
 #import "MessageCollectionViewCell.h"
 #import "UIColor+Utilities.h"
 #import "ViewConstants.h"
+#import "DataManager.h"
 
 @interface MessageCollectionViewCell ()
 @property (weak, nonatomic) IBOutlet UIButton *voteButton;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (nonatomic) NSString *textId;
 
 @end
 
@@ -64,6 +66,7 @@
     }
     [self.avatarImageView setImage:[UIImage imageNamed:data.author]];
     [self setVoteButtonScore:data.voteScore];
+    self.textId = data.textId;
 }
 
 - (void)setVoteButtonScore:(NSString *)score
@@ -86,6 +89,7 @@
     score++;
     [self.voteButton setTitle:[NSString stringWithFormat:@"%ld", score] forState:UIControlStateNormal];
     // Call Post API for vote
+    [[DataManager sharedInstance] voteWithAuthor:kAuthor messageId:self.textId];
     
 }
 

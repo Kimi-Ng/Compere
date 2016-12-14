@@ -24,5 +24,6 @@ typedef NS_ENUM(NSUInteger, TabBarType){
 #define kMessageCollectionViewCellIdentifier @"MessageCollectionViewCell"
 #define kQuestionSectionCellIdentifier @"QuestionSectionCell"
 #define kInputViewHeight 40
+#define kAuthor @"Guest"
 
 @end
