@@ -47,6 +47,11 @@
     self.tabBar.delegate = self;
     [UITabBar appearance].barTintColor = [UIColor colorWithHex:kYahooLightPurple];
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"AmericanTypewriter" size:18.0f], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    // Add separator
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.tabBar.bounds)/2, 0, 1, CGRectGetHeight(self.tabBar.bounds))];
+    [separator setBackgroundColor:[UIColor whiteColor]];
+    [self.tabBar addSubview:separator];
+    
 }
 - (void)setChildViewController:(UIViewController *)vc
 {
