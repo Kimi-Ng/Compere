@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageDataObject.h"
 
 @interface MessageCollectionViewCell : UICollectionViewCell
 
 + (CGSize)cellDefaultSize;
+
+- (void)populateCellWithData:(MessageDataObject *)data;
 
 @end

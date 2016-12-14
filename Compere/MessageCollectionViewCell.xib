@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="40"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5el-cg-Fir" userLabel="avatarImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guest-icon" translatesAutoresizingMaskIntoConstraints="NO" id="5el-cg-Fir" userLabel="avatarImageView">
                         <rect key="frame" x="10" y="0.0" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="38t-ou-bIK"/>
@@ -104,9 +104,15 @@
                 <constraint firstItem="5el-cg-Fir" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="xTS-BQ-zZi"/>
             </constraints>
             <connections>
+                <outlet property="avatarImageView" destination="5el-cg-Fir" id="m9v-Wg-GE0"/>
+                <outlet property="contentLabel" destination="NKY-WS-rop" id="vz4-Ft-7s1"/>
+                <outlet property="nameLabel" destination="T58-cu-68u" id="Psg-00-roj"/>
                 <outlet property="shareButton" destination="z0z-3j-WLJ" id="4yB-lo-dB1"/>
                 <outlet property="voteButton" destination="MUa-hK-jgE" id="WQm-GC-uhN"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="guest-icon" width="356" height="358"/>
+    </resources>
 </document>

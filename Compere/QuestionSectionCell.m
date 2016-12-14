@@ -9,10 +9,12 @@
 #import "QuestionSectionCell.h"
 #import "ViewConstants.h"
 #import "MessageCollectionViewCell.h"
+#import "MessageDataObject.h"
 
 @interface QuestionSectionCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UIColor *cellBackgroundColor;
+@property (strong, nonatomic) NSArray *dataList;
 @end
 
 @implementation QuestionSectionCell
@@ -35,6 +37,11 @@
     return 1;
 }
 
+- (void)populateCellWithDataList:(NSArray *)dataList
+{
+    self.dataList = dataList;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 10;//self.commentDataArray.count;
@@ -43,6 +50,8 @@
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier forIndexPath:indexPath];
+    //TODO:
+    //[((MessageCollectionViewCell *)cell) populateCellWithData:self.dataList[indexPath.row]];
     if (self.cellBackgroundColor) {
         [cell setBackgroundColor:self.cellBackgroundColor];
     }

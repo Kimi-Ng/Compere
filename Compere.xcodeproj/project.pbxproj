@@ -26,6 +26,8 @@
 		E3E0E8C51DFFF5DF00A34D58 /* MessageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E0E8C31DFFF5DF00A34D58 /* MessageCollectionViewCell.xib */; };
 		E3E0E8D11E0070C600A34D58 /* QuestionSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E0E8CF1E0070C600A34D58 /* QuestionSectionCell.m */; };
 		E3E0E8D21E0070C600A34D58 /* QuestionSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E0E8D01E0070C600A34D58 /* QuestionSectionCell.xib */; };
+		E3E0E8D51E00F94F00A34D58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E0E8D41E00F94F00A34D58 /* DataManager.m */; };
+		E3E0E8D81E00FA0000A34D58 /* MessageDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E0E8D71E00FA0000A34D58 /* MessageDataObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,10 @@
 		E3E0E8CE1E0070C600A34D58 /* QuestionSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionSectionCell.h; sourceTree = "<group>"; };
 		E3E0E8CF1E0070C600A34D58 /* QuestionSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionSectionCell.m; sourceTree = "<group>"; };
 		E3E0E8D01E0070C600A34D58 /* QuestionSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionSectionCell.xib; sourceTree = "<group>"; };
+		E3E0E8D31E00F94F00A34D58 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		E3E0E8D41E00F94F00A34D58 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		E3E0E8D61E00FA0000A34D58 /* MessageDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDataObject.h; sourceTree = "<group>"; };
+		E3E0E8D71E00FA0000A34D58 /* MessageDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDataObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,10 @@
 				E3E0E8CE1E0070C600A34D58 /* QuestionSectionCell.h */,
 				E3E0E8CF1E0070C600A34D58 /* QuestionSectionCell.m */,
 				E3E0E8D01E0070C600A34D58 /* QuestionSectionCell.xib */,
+				E3E0E8D31E00F94F00A34D58 /* DataManager.h */,
+				E3E0E8D41E00F94F00A34D58 /* DataManager.m */,
+				E3E0E8D61E00FA0000A34D58 /* MessageDataObject.h */,
+				E3E0E8D71E00FA0000A34D58 /* MessageDataObject.m */,
 			);
 			path = Compere;
 			sourceTree = "<group>";
@@ -334,7 +344,9 @@
 				E39E045F1DF3316700C183F9 /* main.m in Sources */,
 				E3E0E8C41DFFF5DF00A34D58 /* MessageCollectionViewCell.m in Sources */,
 				E3E0E8BC1DFFEB7400A34D58 /* CustomTabBarViewController.m in Sources */,
+				E3E0E8D81E00FA0000A34D58 /* MessageDataObject.m in Sources */,
 				E3E0E8B81DFFE2A500A34D58 /* UIColor+Utilities.m in Sources */,
+				E3E0E8D51E00F94F00A34D58 /* DataManager.m in Sources */,
 				E3E0E8AF1DFFDAF700A34D58 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

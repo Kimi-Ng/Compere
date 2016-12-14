@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface QuestionSectionCell : UICollectionViewCell
+
 - (void)setSectionBackgroundColor:(UIColor *)bgColor;
+
+- (void)populateCellWithDataList:(NSArray *)dataList;
 
 @end

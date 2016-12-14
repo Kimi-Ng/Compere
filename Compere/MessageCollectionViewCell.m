@@ -13,6 +13,9 @@
 @interface MessageCollectionViewCell ()
 @property (weak, nonatomic) IBOutlet UIButton *voteButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @end
 
@@ -29,7 +32,6 @@
     [self setUpButtons];
 }
 
-
 - (void)setUpButtons
 {
     self.voteButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
@@ -37,6 +39,11 @@
     self.shareButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
     [self.shareButton.titleLabel setTextColor:[UIColor colorWithHex:kYahooDarkPurple]];
     [self.shareButton setTitleColor:[UIColor colorWithHex:kYahooDarkPurple] forState:UIControlStateNormal];
+}
+
+- (void)populateCellWithData:(MessageDataObject *)data
+{
+    
 }
 
 - (IBAction)didTapOnVoteButton:(id)sender
