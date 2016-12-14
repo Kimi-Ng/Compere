@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoViewController">
             <connections>
+                <outlet property="sentimentImageView" destination="gW3-A2-uxc" id="M8y-IR-gDD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +20,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="vVV-EW-OUL">
+                    <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                </imageView>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQz-KB-0kd">
                     <rect key="frame" x="167.5" y="15" width="40" height="25"/>
                     <subviews>
@@ -44,13 +48,29 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-A2-uxc">
+                    <rect key="frame" x="0.0" y="617" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="4Bu-nW-ojm"/>
+                        <constraint firstAttribute="width" constant="50" id="eFo-0A-S1o"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.67843137249999996" green="0.24313725489999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="bQz-KB-0kd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="5gX-lr-trR"/>
+                <constraint firstItem="vVV-EW-OUL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GJs-L4-qKX"/>
+                <constraint firstAttribute="trailing" secondItem="vVV-EW-OUL" secondAttribute="trailing" id="OVI-H6-arF"/>
+                <constraint firstItem="gW3-A2-uxc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qem-ER-X85"/>
+                <constraint firstAttribute="bottom" secondItem="gW3-A2-uxc" secondAttribute="bottom" id="R3d-eq-Inh"/>
+                <constraint firstAttribute="bottom" secondItem="vVV-EW-OUL" secondAttribute="bottom" id="Rhs-dx-28Z"/>
                 <constraint firstItem="bQz-KB-0kd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eFW-54-tuT"/>
+                <constraint firstItem="vVV-EW-OUL" firstAttribute="top" secondItem="bQz-KB-0kd" secondAttribute="bottom" id="x2T-Nj-LOY"/>
             </constraints>
             <point key="canvasLocation" x="110.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="video-placeholder" width="1206" height="678"/>
+    </resources>
 </document>
