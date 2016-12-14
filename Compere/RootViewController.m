@@ -10,18 +10,21 @@
 #import "VideoViewController.h"
 #import "CommentViewController.h"
 #import "QuestionViewController.h"
+#import "InputViewController.h"
 #import "UIColor+Utilities.h"
+#import "DataManager.h"
 
 #import "CustomTabBarViewController.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
 
+#define kOFFSET_FOR_KEYBOARD 270.0
 
 static NSString const *kTabBarTintColor = @"0x8300FF";
 
-
-@interface RootViewController ()
-@property (strong, nonatomic) UITabBarController *tabBarController;
+@interface RootViewController () <InputViewControllerProtocol>
+@property (strong, nonatomic) CustomTabBarViewController *tabBarController;
+@property (strong, nonatomic) InputViewController *anInputViewController;
 @end
 
 @implementation RootViewController
@@ -35,6 +38,34 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
     [self setUpVideoController];
     [self setUpTabBarController];
     [self setUpInputView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,18 +84,25 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
 
 - (void)setUpInputView
 {
-    // TODO
-    // Use kInputViewHeight
+    self.anInputViewController = [[InputViewController alloc] init];
+    self.anInputViewController.delegate = self;
+
+    CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+    CGFloat screenHeight = CGRectGetMaxY([UIScreen mainScreen].bounds);
+    self.anInputViewController.view.frame = CGRectMake(0.f, screenHeight - kInputViewHeight, screenWidth, kInputViewHeight);
+    
+    [self.view addSubview:self.anInputViewController.view];
+    [self addChildViewController:self.anInputViewController];
 }
 
 - (void)setUpTabBarController
 {
-    CustomTabBarViewController *tabBarController = [[CustomTabBarViewController alloc] initWithNibName:@"CustomTabBarViewController" bundle:nil];
-    [tabBarController.view setFrame:CGRectMake(0, kVideoHeight, kTabBarControllerWidth, kTabBarControllerHeight - kInputViewHeight)];
-    [tabBarController setSelectedIndex:TabBarComment];
-    [self addChildViewController:tabBarController];
-    [self.view addSubview:tabBarController.view];
-    [tabBarController didMoveToParentViewController:self];
+    self.tabBarController = [[CustomTabBarViewController alloc] initWithNibName:@"CustomTabBarViewController" bundle:nil];
+    [self.tabBarController.view setFrame:CGRectMake(0, kVideoHeight, kTabBarControllerWidth, kTabBarControllerHeight - kInputViewHeight)];
+    [self.tabBarController setSelectedIndex:TabBarComment];
+    [self addChildViewController:self.tabBarController];
+    [self.view addSubview:self.tabBarController.view];
+    [self.tabBarController didMoveToParentViewController:self];
 
 }
 
@@ -82,5 +120,40 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
     return result;
 }
 
+#pragma mark - keyboard events
+-(void)keyboardWillShow {
+    // Animate the current view out of the way
+    [self setViewMovedUp:YES];
+}
+
+-(void)keyboardWillHide {
+    [self setViewMovedUp:NO];
+}
+
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGRect rect = self.anInputViewController.view.frame;
+    if (movedUp)
+    {
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+    }
+    self.anInputViewController.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
+
+#pragma mark - InputViewControllerProtocol
+- (void)onUserPostMessage:(MessageDataObject*)message
+{
+    [[DataManager sharedInstance].allContentMockDataList addObject:message];
+    [self.tabBarController.commentViewController refreshContent];
+}
 
 @end

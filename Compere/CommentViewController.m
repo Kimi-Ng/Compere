@@ -64,5 +64,9 @@
     //return CGSizeZero;
 }
 
+- (void)refreshContent
+{
+    [self.collectionView reloadData];
+}
 
 @end
