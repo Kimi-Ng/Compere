@@ -32,8 +32,15 @@
     [self setUpButtons];
 }
 
+- (void)prepareForReuse
+{
+    self.voteButton.hidden = NO;
+}
+
 - (void)setUpButtons
 {
+    self.avatarImageView.layer.cornerRadius = 20;
+    self.avatarImageView.clipsToBounds = YES;
     self.voteButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
     [self.voteButton setTitleColor:[UIColor colorWithHex:kYahooDarkPurple] forState:UIControlStateNormal];
     self.shareButton.layer.borderColor = [UIColor colorWithHex:kYahooLightPurple].CGColor;
@@ -43,7 +50,20 @@
 
 - (void)populateCellWithData:(MessageDataObject *)data
 {
+    self.nameLabel.text = data.author;
+    self.contentLabel.text = data.content;
     
+    [self setVoteButtonScore:data.voteScore];
+}
+
+- (void)setVoteButtonScore:(NSString *)score
+{
+    if (score.length == 0){
+        self.voteButton.hidden = YES;
+    } else {
+        self.voteButton.hidden = NO;
+        [self.voteButton setTitle:score forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)didTapOnVoteButton:(id)sender
@@ -51,6 +71,12 @@
     self.voteButton.userInteractionEnabled = NO;
     [self.voteButton setBackgroundColor:[UIColor colorWithHex:kYahooLightPurple]];
     [self.voteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    NSInteger score = [self.voteButton.titleLabel.text integerValue];
+    score++;
+    [self.voteButton setTitle:[NSString stringWithFormat:@"%ld", score] forState:UIControlStateNormal];
+    // Call Post API for vote
+    
 }
 
 - (IBAction)didTapOnShareButton:(id)sender {

@@ -18,15 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="40"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guest-icon" translatesAutoresizingMaskIntoConstraints="NO" id="5el-cg-Fir" userLabel="avatarImageView">
-                        <rect key="frame" x="10" y="0.0" width="40" height="40"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guest-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="5el-cg-Fir" userLabel="avatarImageView">
+                        <rect key="frame" x="5" y="0.0" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="38t-ou-bIK"/>
                             <constraint firstAttribute="height" constant="40" id="gkv-xP-LGY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kimi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T58-cu-68u">
-                        <rect key="frame" x="55" y="0.0" width="32" height="20"/>
+                        <rect key="frame" x="50" y="0.0" width="32" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7m0-bt-8nA"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where did you buy that hat?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKY-WS-rop">
-                        <rect key="frame" x="55" y="20" width="194" height="20"/>
+                        <rect key="frame" x="50" y="20" width="194" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7ai-NM-WZB"/>
                         </constraints>
@@ -101,7 +101,7 @@
                 <constraint firstItem="NKY-WS-rop" firstAttribute="leading" secondItem="5el-cg-Fir" secondAttribute="trailing" constant="5" id="nWy-yQ-dDM"/>
                 <constraint firstItem="5el-cg-Fir" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nk6-2i-sO0"/>
                 <constraint firstItem="T58-cu-68u" firstAttribute="leading" secondItem="5el-cg-Fir" secondAttribute="trailing" constant="5" id="ulv-Ba-0g3"/>
-                <constraint firstItem="5el-cg-Fir" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="xTS-BQ-zZi"/>
+                <constraint firstItem="5el-cg-Fir" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="xTS-BQ-zZi"/>
             </constraints>
             <connections>
                 <outlet property="avatarImageView" destination="5el-cg-Fir" id="m9v-Wg-GE0"/>
@@ -113,6 +113,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="guest-icon" width="356" height="358"/>
+        <image name="guest-icon-1" width="158" height="158"/>
     </resources>
 </document>

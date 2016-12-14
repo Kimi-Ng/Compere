@@ -9,6 +9,8 @@
 #import "QuestionViewController.h"
 #import "ViewConstants.h"
 #import "QuestionSectionCell.h"
+#import "DataManager.h"
+
 
 static NSString * const kHotCellIdentifier = @"hotCellIdentifier";
 static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
@@ -54,6 +56,7 @@ static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
     switch (indexPath.section) {
         case 0:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHotCellIdentifier forIndexPath:indexPath];
+            [((QuestionSectionCell *)cell) populateCellWithDataList:[DataManager sharedInstance].recentQuestionMockDataList];
             if (!cell) {
                 //init cell?
                 //cell = [MessageCollectionViewCell alloc] initw
@@ -61,9 +64,12 @@ static NSString * const kRecentCellIdentifier = @"recentCellIdentifier";
             break;
         case 1:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kRecentCellIdentifier forIndexPath:indexPath];
-            [(QuestionSectionCell *)cell setSectionBackgroundColor:[UIColor lightGrayColor]];
+            [(QuestionSectionCell *)cell setSectionBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+            [((QuestionSectionCell *)cell) populateCellWithDataList:[DataManager sharedInstance].topQuestionMockDataList];
+            
             if (!cell) {
                 //init cell?
+                
                 
             }
             break;

@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface DataManager : NSObject
+
+@property (strong, nonatomic) NSMutableArray *allContentMockDataList;
+@property (strong, nonatomic) NSMutableArray *recentQuestionMockDataList;
+@property (strong, nonatomic) NSMutableArray *topQuestionMockDataList;
+
 + (DataManager *)sharedInstance;
+
+- (void)applyMockData;
 
 @end

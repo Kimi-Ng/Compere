@@ -9,6 +9,7 @@
 #import "CommentViewController.h"
 #import "MessageCollectionViewCell.h"
 #import "ViewConstants.h"
+#import "DataManager.h"
 
 @interface CommentViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -21,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setUpCollectionView];
+    [[DataManager sharedInstance] applyMockData];
 }
 
 - (void)setUpCollectionView
@@ -42,13 +44,14 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;//self.commentDataArray.count;
+    return [DataManager sharedInstance].allContentMockDataList.count;
+    //return 10;//self.commentDataArray.count;
 }
 
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier forIndexPath:indexPath];
-    
+    [((MessageCollectionViewCell *)cell) populateCellWithData:[DataManager sharedInstance].allContentMockDataList[indexPath.row]];
     return cell;
 }
 

@@ -44,14 +44,15 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;//self.commentDataArray.count;
+    return self.dataList.count;
+    //return 10;//self.commentDataArray.count;
 }
 
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCollectionViewCellIdentifier forIndexPath:indexPath];
     //TODO:
-    //[((MessageCollectionViewCell *)cell) populateCellWithData:self.dataList[indexPath.row]];
+    [((MessageCollectionViewCell *)cell) populateCellWithData:self.dataList[indexPath.row]];
     if (self.cellBackgroundColor) {
         [cell setBackgroundColor:self.cellBackgroundColor];
     }

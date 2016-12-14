@@ -9,7 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface MessageDataObject : NSObject
-@property (strong, nonatomic) NSString *author_name;
+@property (strong, nonatomic) NSString *author;
+@property (strong, nonatomic) NSString *avatarImage;
+@property (strong, nonatomic) NSString *content;
+@property (assign, nonatomic) BOOL isQuestion;
+@property (strong, nonatomic) NSString *voteScore;
+
+- (instancetype)initWithAuthor:(NSString *)author content:(NSString *)content isQuestion:(BOOL)isQuestion voteScore:(NSString *)voteScore;
+
 //TODO: add more properties for api
 
 @end
