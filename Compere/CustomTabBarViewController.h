@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentViewController.h"
 #import "ViewConstants.h"
 
 @interface CustomTabBarViewController : UIViewController
+
+@property (strong, nonatomic) CommentViewController *commentViewController;
+@property (strong, nonatomic) UIViewController *questionViewController;
+
 - (void)setSelectedIndex:(TabBarType)tab;
 
 @end

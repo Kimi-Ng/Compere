@@ -7,7 +7,6 @@
 //
 
 #import "CustomTabBarViewController.h"
-#import "CommentViewController.h"
 #import "QuestionViewController.h"
 #import "ViewConstants.h"
 #import "UIColor+Utilities.h"
@@ -16,8 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UITabBarItem *commentBarItem;  // tag = 0
 @property (weak, nonatomic) IBOutlet UITabBarItem *questionBarItem; // tag = 1
-@property (strong, nonatomic) UIViewController *commentViewController;
-@property (strong, nonatomic) UIViewController *questionViewController;
 @property (strong, nonatomic) UIView *bottomView;
 
 @end
@@ -27,12 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    CommentViewController *commentVC = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
+    self.commentViewController = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
     QuestionViewController *questionVC = [[QuestionViewController alloc] initWithNibName:@"QuestionViewController" bundle:nil];
-    self.commentViewController = commentVC;
     self.questionViewController = questionVC;
     
-    [self setChildViewController:commentVC];
+    [self setChildViewController:self.commentViewController];
     [self setChildViewController:questionVC];
     
     [self setUpTabBar];
