@@ -22,8 +22,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setUpCollectionView];
-    [[DataManager sharedInstance] applyMockData];
+    //[[DataManager sharedInstance] applyMockData];
+    [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+        [self.collectionView reloadData];
+    }];
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
+//        [self.collectionView reloadData];
+//    }];
+//}
 
 - (void)setUpCollectionView
 {
@@ -45,7 +56,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [DataManager sharedInstance].allContentMockDataList.count;
-    //return 10;//self.commentDataArray.count;
 }
 
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

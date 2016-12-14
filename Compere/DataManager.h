@@ -22,5 +22,7 @@
 - (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
 - (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
 - (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+- (void)postWithAuthor:(NSString *)author text:(NSString *)text;
+- (void)voteWithAuthor:(NSString *)author messageId:(NSString *)messageId;
 
 @end

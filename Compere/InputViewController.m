@@ -8,17 +8,20 @@
 
 #import "InputViewController.h"
 #import "SuggestionCollectionViewCell.h"
+#import "DataManager.h"
+#import "ViewConstants.h"
 
 static CGFloat const kCellHeight = 38.f;
 static CGFloat const kHorizontalMargin = 10.f;
 
-static NSString * const kAuthor = @"Guest";
+static NSString * const kSimilarApiUrl = @"http://localhost:8080/similar?text=%@";
 
 @interface InputViewController ()
 <
 UITextFieldDelegate,
 UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout
+UICollectionViewDelegateFlowLayout,
+NSURLConnectionDelegate
 >
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -26,6 +29,8 @@ UICollectionViewDelegateFlowLayout
 
 @property (strong, nonatomic) NSArray *questionPrefixes;
 @property (strong, nonatomic) NSArray *suggestions;
+
+@property (strong, nonatomic) NSURLSession *session;
 
 @end
 
@@ -38,6 +43,7 @@ UICollectionViewDelegateFlowLayout
     [self setupCollectionView];
     self.questionPrefixes = @[@"what",@"why",@"how",@"when",@"who"];
     self.suggestions = @[@"suggestion 1 ", @"suggestion 2", @"suggestion 3"];
+    self.session = [NSURLSession sharedSession];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +58,7 @@ UICollectionViewDelegateFlowLayout
             MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@"" textId:@""];
             [self.delegate onUserPostMessage:message];
         }
-        //TODO: api call to post text
+        [[DataManager sharedInstance] postWithAuthor:kAuthor text:text];
     }
     
     [self.collectionView setHidden:YES];
@@ -66,6 +72,11 @@ UICollectionViewDelegateFlowLayout
     if (textField.text.length >= 3) {
         if (string.length > 0 && ![string isEqualToString:@"\n"]) {
             // TODO: api call to fetch suggestions & display suggestion view
+            
+//            NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:kSimilarApiUrl,textField.text]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//                NSLog(@"%@", json);
+//            }];
         }
         // TODO: refactor once api is ready
         if (self.collectionView.isHidden) {
@@ -77,7 +88,6 @@ UICollectionViewDelegateFlowLayout
             [self.collectionView setHidden:NO];
         }
     } else {
-        // TODO: hide suggestion view
         [self.collectionView setHidden:YES];
     }
     return YES;
