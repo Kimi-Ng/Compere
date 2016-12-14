@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *topQuestionMockDataList;
 
 + (DataManager *)sharedInstance;
-
+- (void)getSth;
 - (void)applyMockData;
 
 @end

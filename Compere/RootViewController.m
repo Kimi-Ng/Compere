@@ -36,6 +36,7 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
     // Do any additional setup after loading the view.
     
     //TODO: GET comments, top questions, recentQuestions
+    [[DataManager sharedInstance] getSth];
     
     [self setUpVideoController];
     [self setUpTabBarController];

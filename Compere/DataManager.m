@@ -26,19 +26,23 @@
     return sharedInstance;
 }
 
+//- (void)postWithAuthor:(NSString *)author text:(NSString *)text
+
 - (void)getSth
 {
 
-    NSString *requestUrlString;// = [NSString stringWithFormat:@"%@?lang=%@&region=%@&device=ios&version=%@", APICardHomeBaseUrl, APILanguage, APIRegion, version];
+    NSString *requestUrlString = @"http://localhost:8080/all";// = [NSString stringWithFormat:@"%@?lang=%@&region=%@&device=ios&version=%@", APICardHomeBaseUrl, APILanguage, APIRegion, version];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        NSArray *widgetArray = jsonDict[@"widgets"][@"result"];
         
-        for(NSDictionary *widget in widgetArray) {
-        //parse the json
-        }
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        NSLog(@">>>>>>%@", jsonDict);
+//        NSArray *widgetArray = jsonDict[@"widgets"][@"result"];
+//        
+//        for(NSDictionary *widget in widgetArray) {
+//        //parse the json
+//        }
     }
     ] resume];
 
