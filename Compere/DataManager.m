@@ -47,7 +47,7 @@
 - (void)applyMockData
 {
     //name, content,
-    NSArray *allContentNameList = @[@"Dale", @"Kimi", @"Arun", @"Neelesh", @"Muru", @"Erin", @"Aurn", @"Kimi",@"Dale", @"Erin", @"Kimi"];
+    NSArray *allContentNameList = @[@"Dale", @"Kimi", @"Arun", @"Neelesh", @"Muru", @"Erin", @"Arun", @"Kimi",@"Dale", @"Erin", @"Kimi"];
     // for comment section
     NSArray *allContentList = @[@"wow, that's cute~",
                                 @">//<",

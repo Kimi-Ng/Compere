@@ -52,7 +52,14 @@
 {
     self.nameLabel.text = data.author;
     self.contentLabel.text = data.content;
-    
+    if (data.isQuestion) {
+        self.voteButton.hidden = NO;
+        self.shareButton.hidden =NO;
+    } else {
+        self.voteButton.hidden = YES;
+        self.shareButton.hidden = YES;
+    }
+    [self.avatarImageView setImage:[UIImage imageNamed:data.author]];
     [self setVoteButtonScore:data.voteScore];
 }
 

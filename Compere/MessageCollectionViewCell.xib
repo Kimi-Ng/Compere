@@ -44,10 +44,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUa-hK-jgE">
-                        <rect key="frame" x="267" y="5" width="45" height="30"/>
+                        <rect key="frame" x="280" y="5" width="35" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="EDZ-pA-hmU"/>
-                            <constraint firstAttribute="width" constant="45" id="ggQ-Ci-621"/>
+                            <constraint firstAttribute="width" constant="35" id="ggQ-Ci-621"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <state key="normal" title="Vote">
@@ -65,14 +65,13 @@
                             <action selector="didTapOnVoteButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hmW-T5-vxU"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0z-3j-WLJ">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0z-3j-WLJ">
                         <rect key="frame" x="320" y="5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="PyS-AE-kRO"/>
                             <constraint firstAttribute="width" constant="30" id="dsE-eY-6r9"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                        <state key="normal" title="S">
+                        <state key="normal" image="share-fb-icon">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -80,7 +79,7 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="4"/>
+                                <integer key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -94,7 +93,7 @@
                 <constraint firstItem="z0z-3j-WLJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="BHb-ac-42F"/>
                 <constraint firstItem="NKY-WS-rop" firstAttribute="top" secondItem="T58-cu-68u" secondAttribute="bottom" id="BKq-Wy-2Qc"/>
                 <constraint firstItem="T58-cu-68u" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DLz-uW-StC"/>
-                <constraint firstItem="z0z-3j-WLJ" firstAttribute="leading" secondItem="MUa-hK-jgE" secondAttribute="trailing" constant="8" id="Ql0-Yn-bhk"/>
+                <constraint firstItem="z0z-3j-WLJ" firstAttribute="leading" secondItem="MUa-hK-jgE" secondAttribute="trailing" constant="5" id="Ql0-Yn-bhk"/>
                 <constraint firstItem="MUa-hK-jgE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="XhW-hV-NoW"/>
                 <constraint firstAttribute="bottom" secondItem="z0z-3j-WLJ" secondAttribute="bottom" constant="5" id="a3F-Oo-w9z"/>
                 <constraint firstAttribute="bottom" secondItem="MUa-hK-jgE" secondAttribute="bottom" constant="5" id="l7D-OH-5jk"/>
@@ -114,5 +113,6 @@
     </objects>
     <resources>
         <image name="guest-icon-1" width="158" height="158"/>
+        <image name="share-fb-icon" width="32" height="32"/>
     </resources>
 </document>
