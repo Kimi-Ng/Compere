@@ -54,6 +54,8 @@
     [((MessageCollectionViewCell *)cell) populateCellWithData:[DataManager sharedInstance].allContentMockDataList[indexPath.row]];
     if (((MessageDataObject *)[DataManager sharedInstance].allContentMockDataList[indexPath.row]).isQuestion) {
             [(MessageCollectionViewCell *)cell setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1]];
+    } else {
+        [(MessageCollectionViewCell *)cell setBackgroundColor:[UIColor whiteColor]];
     }
     return cell;
 }

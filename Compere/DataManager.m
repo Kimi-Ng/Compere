@@ -113,17 +113,17 @@
                                 @"Where to buy Melody's T-shirt?",
                                 @"Melody! Melody!",
                                 @"This program is funny"];
-    NSArray *allContentTypeList = @[@"C",
-                                    @"C",
-                                    @"C",
-                                    @"Q",
-                                    @"C",
-                                    @"C",
-                                    @"C",
-                                    @"C",
-                                    @"Q",
-                                    @"C",
-                                    @"C"];
+    NSArray *allContentTypeList = @[@"c",
+                                    @"c",
+                                    @"c",
+                                    @"q",
+                                    @"c",
+                                    @"c",
+                                    @"c",
+                                    @"c",
+                                    @"q",
+                                    @"c",
+                                    @"c"];
     NSArray *allContentVoteScoreList = @[@"",
                                     @"",
                                     @"",
@@ -154,7 +154,7 @@
     self.recentQuestionMockDataList = [[NSMutableArray alloc] initWithCapacity:recentQuestionList.count];
     self.topQuestionMockDataList = [[NSMutableArray alloc] initWithCapacity:topQuestionList.count];
     for (int i=0;i<allContentList.count;i++){
-        BOOL isQ = [allContentTypeList[i] isEqualToString:@"Q"];
+        BOOL isQ = [allContentTypeList[i] isEqualToString:@"q"];
         MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:allContentNameList[i] content:allContentList[i] isQuestion:isQ voteScore:allContentVoteScoreList[i] textId:allContentVoteScoreList[i]];
         [self.allContentMockDataList addObject:dataObject];
     }

@@ -31,6 +31,17 @@
                             <constraint firstAttribute="width" constant="30" id="WnB-1z-0nO"/>
                         </constraints>
                         <state key="normal" image="share-icon"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="didTapOnShareButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Jvd-GF-i3K"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KU-gg-wG1">
                         <rect key="frame" x="301" y="4" width="35" height="30"/>
@@ -38,7 +49,7 @@
                             <constraint firstAttribute="width" constant="35" id="G0y-Mh-Gb9"/>
                             <constraint firstAttribute="height" constant="30" id="Ur3-Hj-TYr"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
+                        <state key="normal" title="2"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                 <integer key="value" value="1"/>
@@ -47,6 +58,9 @@
                                 <integer key="value" value="4"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="didTapOnVoteButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WgF-5t-rV8"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
