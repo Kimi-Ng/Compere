@@ -282,6 +282,7 @@
 				TargetAttributes = {
 					E39E04591DF3316700C183F9 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2ARNJY38FW;
 						ProvisioningStyle = Automatic;
 					};
 					E39E04721DF3316700C183F9 = {
@@ -497,7 +498,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2ARNJY38FW;
 				INFOPLIST_FILE = Compere/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kiming.Compere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,7 +511,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2ARNJY38FW;
 				INFOPLIST_FILE = Compere/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kiming.Compere;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -43,6 +43,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSData *postData = [stringData dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:postData];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!data) {
+            return ;
+        }
         NSString *messageId = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if (completion) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -77,7 +80,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/all?author=%@", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (!data) {
+            return;
+        }
         //NSDictionary *jsonDict
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
@@ -158,7 +163,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@&type=q", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (!data) {
+            return;
+        }
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
         self.topQuestionMockDataList = [@[] mutableCopy];
@@ -176,7 +183,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@&type=q", author];
     requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (!data) {
+            return;
+        }
         //NSDictionary *jsonDict
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
@@ -231,7 +240,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSString *requestUrlString = @"http://localhost:8080/sentiment";
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (!data) {
+            return;
+        }
         NSString *s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSUInteger i = (NSUInteger)([s floatValue] * 10.f);
         
