@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageDataObject.h"
 
 @interface SuggestionCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *suggestionLabel;
+@property (nonatomic) NSString *textId;
 
 + (NSString*)cellReuseIdentifier;
 - (void)setVoteButtonScore:(NSString *)score;
-
+- (void)populateCellWithData:(MessageDataObject *)data;
 @end

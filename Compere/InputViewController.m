@@ -27,7 +27,7 @@ UICollectionViewDelegateFlowLayout,
 NSURLConnectionDelegate
 >
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 @property (strong, nonatomic) NSArray *questionPrefixes;
@@ -127,7 +127,9 @@ NSURLConnectionDelegate
     SuggestionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SuggestionCollectionViewCell cellReuseIdentifier] forIndexPath:indexPath];
     MessageDataObject *obj = self.suggestions[indexPath.row];
     cell.suggestionLabel.text = obj.content;
-    [cell setVoteButtonScore:obj.voteScore];
+
+    [cell populateCellWithData:obj];
+    
     return cell;
 }
 

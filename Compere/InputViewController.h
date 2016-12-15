@@ -18,5 +18,6 @@
 @interface InputViewController : UIViewController
 
 @property (weak, nonatomic) id<InputViewControllerProtocol> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end

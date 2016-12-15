@@ -81,9 +81,15 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
    VideoViewController *videoVC = [[VideoViewController alloc] initWithNibName:@"VideoViewController" bundle:nil];
    self.videoController = videoVC;
    [videoVC.view setFrame:CGRectMake(0, 0, kVideoWidth, kVideoHeight)];
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapVideoView)];
+   [videoVC.view addGestureRecognizer:tap];
    [self addChildViewController:videoVC];
    [self.view addSubview:videoVC.view];
    [videoVC didMoveToParentViewController:self];
+}
+
+- (void)didTapVideoView{
+        [self.anInputViewController.textField resignFirstResponder];
 }
 
 - (void)setUpInputView

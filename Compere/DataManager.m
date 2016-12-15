@@ -80,7 +80,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
         self.allContentMockDataList = [@[] mutableCopy];
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:dict[@"voted"]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:[dict[@"voted"] boolValue]];
             [self.allContentMockDataList addObject:dataObject];
         }
         if (completion) {
@@ -160,7 +160,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
         self.topQuestionMockDataList = [@[] mutableCopy];
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:dict[@"voted"]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:[dict[@"voted"] boolValue]];
             [self.topQuestionMockDataList addObject:dataObject];
         }
         dispatch_group_leave(serviceGroup);
@@ -179,7 +179,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
         self.recentQuestionMockDataList = [@[] mutableCopy];
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:dict[@"voted"]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:[dict[@"voted"] boolValue]];
             [self.recentQuestionMockDataList addObject:dataObject];
         }
         dispatch_group_leave(serviceGroup);
@@ -209,7 +209,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
         NSMutableArray *dataArray = [NSMutableArray array];
         for (NSDictionary *dict in arr){
             BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
-            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:dict[@"voted"]];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue] voted:[dict[@"voted"] boolValue]];
             [dataArray addObject:dataObject];
         }
 

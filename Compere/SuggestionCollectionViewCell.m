@@ -9,6 +9,7 @@
 #import "SuggestionCollectionViewCell.h"
 #import "ViewConstants.h"
 #import "UIColor+Utilities.h"
+#import "DataManager.h"
 
 @interface SuggestionCollectionViewCell ()
 @property (weak, nonatomic) IBOutlet UIButton *voteButton;
@@ -28,6 +29,13 @@
     // Initialization code
     [self setUpButtons];
     self.suggestionLabel.text = @"";
+}
+
+- (void)prepareForReuse
+{
+    self.voteButton.hidden = YES;
+    self.voteButton.userInteractionEnabled = YES;
+    [self.voteButton setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)setUpButtons
@@ -52,6 +60,27 @@
     }
 }
 
+- (void)populateCellWithData:(MessageDataObject *)data
+{
+    self.textId = data.textId;
+    
+    self.suggestionLabel.text = data.content;
+    if (data.isQuestion) {
+        self.voteButton.hidden = NO;
+        self.shareButton.hidden =NO;
+        if (data.voted) {
+            [self setButtonVotedWithScore:data.voteScore];
+        } else {
+            [self setVoteButtonScore:data.voteScore];
+        }
+        
+    } else {
+        self.voteButton.hidden = YES;
+        self.shareButton.hidden = YES;
+    }
+    
+}
+
 
 - (UIImage *)image:(UIImage *)image replaceColor:(UIColor *)color
 {
@@ -74,10 +103,30 @@
 }
 
 - (IBAction)didTapOnVoteButton:(id)sender {
-    NSLog(@"!!!!!");
+    self.voteButton.userInteractionEnabled = NO;
+    [self.voteButton setBackgroundColor:[UIColor colorWithHex:kYahooLightPurple]];
+    [self.voteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    NSInteger score = [self.voteButton.titleLabel.text integerValue];
+    score++;
+    [self.voteButton setTitle:[NSString stringWithFormat:@"%ld", score] forState:UIControlStateNormal];
+    // Call Post API for vote
+    [[DataManager sharedInstance] voteWithAuthor:kAuthor messageId:self.textId];
 }
 
 - (IBAction)didTapOnShareButton:(id)sender {
 }
 
+
+- (void)setButtonVotedWithScore:(NSString *)score{
+    if (score.length == 0){
+        self.voteButton.hidden = YES;
+    } else {
+        self.voteButton.hidden = NO;
+        [self.voteButton setBackgroundColor:[UIColor colorWithHex:kYahooLightPurple]];
+        [self.voteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.voteButton setTitle:score forState:UIControlStateNormal];
+    }
+    
+}
 @end
