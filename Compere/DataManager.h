@@ -19,10 +19,13 @@
 - (void)applyMockData; // for testing
 
 
-- (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
-- (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+//- (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+//- (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
+- (void)getTopAndRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
 - (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
-- (void)postWithAuthor:(NSString *)author text:(NSString *)text;
+- (void)getSimilarWithText:(NSString*)text completion:(void (^)(NSArray *))completion;
+- (void)getSentimentWithCompletion:(void (^)(NSUInteger))completion;
+- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type;
 - (void)voteWithAuthor:(NSString *)author messageId:(NSString *)messageId;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface QuestionViewController : UIViewController
 
+- (void)refreshContentWithReload:(BOOL)reload;
+
 @end

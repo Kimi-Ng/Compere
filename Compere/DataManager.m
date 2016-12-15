@@ -29,7 +29,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     return sharedInstance;
 }
 
-- (void)postWithAuthor:(NSString *)author text:(NSString *)text
+- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type
 {
     if (!author || !author.length || !text || !text.length) {
         return;
@@ -39,7 +39,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSURL *requestUrl = [NSURL URLWithString:requestUrlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
     [request setHTTPMethod:@"POST"];
-    NSString *stringData = [NSString stringWithFormat:@"author=%@&text=%@",author,text];
+    NSString *stringData = [NSString stringWithFormat:@"author=%@&text=%@&type=%@",author,text,type];
     NSData *postData = [stringData dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:postData];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -84,16 +84,19 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
             [self.allContentMockDataList addObject:dataObject];
         }
         if (completion) {
-            completion(self.allContentMockDataList);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(self.allContentMockDataList);
+            });
         }
         //RFC 3339 scheme for timestamp
     }
       ] resume];
 }
 
+/*
 - (void)getRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
 {
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@&type=q", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -107,7 +110,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
             [self.recentQuestionMockDataList addObject:dataObject];
         }
         if (completion) {
-            completion(self.recentQuestionMockDataList);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(self.recentQuestionMockDataList);
+            });
         }
         //RFC 3339 scheme for timestamp
     }
@@ -116,7 +121,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
 
 - (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
 {
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@&type=q", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -130,9 +135,105 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
             [self.topQuestionMockDataList addObject:dataObject];
         }
         if (completion) {
-            completion(self.topQuestionMockDataList);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(self.topQuestionMockDataList);
+            });
         }
         //RFC 3339 scheme for timestamp
+    }
+      ] resume];
+}
+*/
+
+- (void)getTopAndRecentQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
+{
+    dispatch_group_t serviceGroup = dispatch_group_create();
+    
+    // Start the first service
+    dispatch_group_enter(serviceGroup);
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@&type=q", author];
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        self.topQuestionMockDataList = [@[] mutableCopy];
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue]];
+            [self.topQuestionMockDataList addObject:dataObject];
+        }
+        dispatch_group_leave(serviceGroup);
+    }
+      ] resume];
+    
+    // Start the second service
+    dispatch_group_enter(serviceGroup);
+    requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@&type=q", author];
+    requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //NSDictionary *jsonDict
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        self.recentQuestionMockDataList = [@[] mutableCopy];
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue]];
+            [self.recentQuestionMockDataList addObject:dataObject];
+        }
+        dispatch_group_leave(serviceGroup);
+    }
+      ] resume];
+
+    dispatch_group_notify(serviceGroup,dispatch_get_main_queue(),^{
+        // Assess any errors
+        // Now call the final completion block
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(self.topQuestionMockDataList);
+            });
+        }
+    });
+}
+
+- (void)getSimilarWithText:(NSString*)text completion:(void (^)(NSArray *))completion
+{
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/similar?text=%@", text];
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        NSMutableArray *dataArray = [NSMutableArray array];
+        for (NSDictionary *dict in arr){
+            BOOL isQ = [dict[@"type"] isEqualToString:@"q"];
+            MessageDataObject *dataObject = [[MessageDataObject alloc] initWithAuthor:dict[@"author"] content:dict[@"text"] isQuestion:isQ voteScore:[dict[@"score"] stringValue] textId:[dict[@"id"] stringValue]];
+            [dataArray addObject:dataObject];
+        }
+
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(dataArray);
+            });
+        }
+    }
+      ] resume];
+}
+
+- (void)getSentimentWithCompletion:(void (^)(NSUInteger))completion
+{
+    NSString *requestUrlString = @"http://localhost:8080/sentiment";
+    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSString *s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSUInteger i = (NSUInteger)([s floatValue] * 10.f);
+        
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(i);
+            });
+        }
     }
       ] resume];
 }

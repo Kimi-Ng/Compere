@@ -74,7 +74,7 @@
 }
 
 - (IBAction)didTapOnVoteButton:(id)sender {
-    //[self setVoteButtonScore
+    NSLog(@"!!!!!");
 }
 
 - (IBAction)didTapOnShareButton:(id)sender {

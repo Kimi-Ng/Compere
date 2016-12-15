@@ -9,6 +9,7 @@
 #import "InputViewController.h"
 #import "SuggestionCollectionViewCell.h"
 #import "DataManager.h"
+#import "MessageDataObject.h"
 #import "ViewConstants.h"
 
 static CGFloat const kCellHeight = 38.f;
@@ -55,10 +56,11 @@ NSURLConnectionDelegate
     NSString *text = self.textField.text;
     if (text && text.length) {
         if (self.delegate) {
-            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@"" textId:@""];
+            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@"0" textId:@""];
             [self.delegate onUserPostMessage:message];
         }
-        [[DataManager sharedInstance] postWithAuthor:kAuthor text:text];
+        NSString *type = [self isAQuestion:text] ? @"q" : @"c";
+        [[DataManager sharedInstance] postWithAuthor:kAuthor text:text type:type];
     }
     
     [self.collectionView setHidden:YES];
@@ -72,21 +74,32 @@ NSURLConnectionDelegate
     if (textField.text.length >= 3) {
         if (string.length > 0 && ![string isEqualToString:@"\n"]) {
             // TODO: api call to fetch suggestions & display suggestion view
-            
-//            NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:kSimilarApiUrl,textField.text]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//                NSLog(@"%@", json);
-//            }];
+            [[DataManager sharedInstance] getSimilarWithText:textField.text completion:^(NSArray *dataArray) {
+                if (!dataArray.count) {
+                    self.suggestions = @[];
+                    [self.collectionView setHidden:YES];
+                } else {
+                    self.suggestions = dataArray;
+                    CGRect rect = self.collectionView.frame;
+                    rect.size.height = self.suggestions.count * kCellHeight;
+                    rect.origin.y = -rect.size.height;
+                    self.collectionView.frame = rect;
+                    if (self.collectionView.isHidden) {
+                        [self.collectionView setHidden:NO];
+                    }
+                    [self.collectionView reloadData];
+                }
+            }];
         }
         // TODO: refactor once api is ready
-        if (self.collectionView.isHidden) {
-            CGRect rect = self.collectionView.frame;
-            rect.size.height = self.suggestions.count * kCellHeight;
-            rect.origin.y = -rect.size.height;
-            self.collectionView.frame = rect;
-            [self.collectionView reloadData];
-            [self.collectionView setHidden:NO];
-        }
+//        if (self.collectionView.isHidden) {
+//            CGRect rect = self.collectionView.frame;
+//            rect.size.height = self.suggestions.count * kCellHeight;
+//            rect.origin.y = -rect.size.height;
+//            self.collectionView.frame = rect;
+//            [self.collectionView reloadData];
+//            [self.collectionView setHidden:NO];
+//        }
     } else {
         [self.collectionView setHidden:YES];
     }
@@ -102,7 +115,9 @@ NSURLConnectionDelegate
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SuggestionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SuggestionCollectionViewCell cellReuseIdentifier] forIndexPath:indexPath];
-    cell.suggestionLabel.text = self.suggestions[indexPath.row];
+    MessageDataObject *obj = self.suggestions[indexPath.row];
+    cell.suggestionLabel.text = obj.content;
+    [cell setVoteButtonScore:obj.voteScore];
     return cell;
 }
 
