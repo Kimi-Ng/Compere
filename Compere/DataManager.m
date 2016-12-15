@@ -77,12 +77,13 @@ static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
 - (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
 {
     
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/all?author=%@", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"%@all?author=%@",kHostUrl, author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
             return;
         }
+        
         //NSDictionary *jsonDict
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
@@ -160,12 +161,14 @@ static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
     
     // Start the first service
     dispatch_group_enter(serviceGroup);
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/top?author=%@&type=q", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"%@top?author=%@&type=q",kHostUrl, author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
+            dispatch_group_leave(serviceGroup);
             return;
         }
+        
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
         self.topQuestionMockDataList = [@[] mutableCopy];
@@ -180,12 +183,14 @@ static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
     
     // Start the second service
     dispatch_group_enter(serviceGroup);
-    requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/recent?author=%@&type=q", author];
+    requestUrlString = [NSString stringWithFormat:@"%@recent?author=%@&type=q",kHostUrl, author];
     requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
+            dispatch_group_leave(serviceGroup);
             return;
         }
+        
         //NSDictionary *jsonDict
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
@@ -212,7 +217,7 @@ static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
 
 - (void)getSimilarWithText:(NSString*)text completion:(void (^)(NSArray *))completion
 {
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/similar?text=%@", text];
+    NSString *requestUrlString = [NSString stringWithFormat:@"%@similar?text=%@",kHostUrl, text];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
@@ -237,13 +242,15 @@ static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
 
 - (void)getSentimentWithCompletion:(void (^)(NSUInteger))completion
 {
-    NSString *requestUrlString = @"http://192.168.2.1:8080/sentiment";
+    NSString *requestUrlString = [NSString stringWithFormat:@"%@sentiment",kHostUrl];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
             return;
         }
+
         NSString *s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"!!! %@",s);
         NSUInteger i = (NSUInteger)([s floatValue] * 10.f);
         
         if (completion) {

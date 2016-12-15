@@ -25,7 +25,7 @@
     [self setUpCollectionView];
     //[[DataManager sharedInstance] applyMockData];
     
-    [NSTimer scheduledTimerWithTimeInterval:30.0
+    [NSTimer scheduledTimerWithTimeInterval:2.0
                                      target:self
                                    selector:@selector(regularIntervalReload)
                                    userInfo:nil

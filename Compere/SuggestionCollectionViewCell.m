@@ -112,6 +112,9 @@
     [self.voteButton setTitle:[NSString stringWithFormat:@"%ld", score] forState:UIControlStateNormal];
     // Call Post API for vote
     [[DataManager sharedInstance] voteWithAuthor:kAuthor messageId:self.textId];
+    if (self.delegate) {
+        [self.delegate suggestionVoted];
+    }
 }
 
 - (IBAction)didTapOnShareButton:(id)sender {
