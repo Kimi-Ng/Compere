@@ -97,6 +97,7 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
     
     [self.view addSubview:self.anInputViewController.view];
     [self addChildViewController:self.anInputViewController];
+    [self.anInputViewController didMoveToParentViewController:self];
 }
 
 - (void)setUpTabBarController

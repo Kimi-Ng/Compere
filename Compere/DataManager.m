@@ -202,7 +202,9 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/similar?text=%@", text];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (!data) {
+            return;
+        }
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         NSMutableArray *dataArray = [NSMutableArray array];
         for (NSDictionary *dict in arr){

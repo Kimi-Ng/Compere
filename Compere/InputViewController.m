@@ -12,6 +12,7 @@
 #import "MessageDataObject.h"
 #import "ViewConstants.h"
 
+#define kOFFSET_FOR_KEYBOARD 270.0
 static CGFloat const kCellHeight = 38.f;
 static CGFloat const kHorizontalMargin = 10.f;
 
@@ -20,6 +21,7 @@ static NSString * const kSimilarApiUrl = @"http://localhost:8080/similar?text=%@
 @interface InputViewController ()
 <
 UITextFieldDelegate,
+UICollectionViewDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
 NSURLConnectionDelegate
@@ -82,8 +84,17 @@ NSURLConnectionDelegate
                     self.suggestions = dataArray;
                     CGRect rect = self.collectionView.frame;
                     rect.size.height = self.suggestions.count * kCellHeight;
-                    rect.origin.y = -rect.size.height;
+                    rect.origin.y = 0;//-rect.size.height;
                     self.collectionView.frame = rect;
+                    
+                    NSLog(@">>%f", self.view.frame.origin.y);
+                    CGRect inputViewFrame = self.view.frame;
+                    inputViewFrame.origin.y = ([UIScreen mainScreen].bounds.size.height - kOFFSET_FOR_KEYBOARD)- kInputViewHeight - rect.size.height;
+                    inputViewFrame.size.height = kInputViewHeight + rect.size.height;
+                    
+                    [self.view setFrame:inputViewFrame];
+                    NSLog(@">>>%f", self.view.frame.origin.y);
+                    NSLog(@">>>%f", self.view.frame.size.height);
                     if (self.collectionView.isHidden) {
                         [self.collectionView setHidden:NO];
                     }
@@ -146,7 +157,7 @@ NSURLConnectionDelegate
     [self.collectionView setHidden:YES];
     
     [self.collectionView registerNib:[UINib nibWithNibName:[SuggestionCollectionViewCell cellReuseIdentifier] bundle:nil] forCellWithReuseIdentifier:[SuggestionCollectionViewCell cellReuseIdentifier]];
-    
+    self.collectionView.userInteractionEnabled = YES;
     [self.view addSubview:self.collectionView];
 }
 
