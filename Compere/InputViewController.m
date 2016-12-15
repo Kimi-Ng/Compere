@@ -72,6 +72,7 @@ NSURLConnectionDelegate
     [self.collectionView setHidden:YES];
     [self.textField resignFirstResponder];
     self.textField.text = @"";
+    [self.view setFrame:CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds) - kInputViewHeight, CGRectGetWidth([UIScreen mainScreen].bounds), kInputViewHeight)];
 }
 
 #pragma mark - UITextFieldDelegate
