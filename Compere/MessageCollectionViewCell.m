@@ -36,9 +36,10 @@
 
 - (void)prepareForReuse
 {
-    self.voteButton.hidden = NO;
+    self.voteButton.hidden = YES;
     self.voteButton.userInteractionEnabled = YES;
     [self.voteButton setBackgroundColor:[UIColor whiteColor]];
+    
 }
 
 - (void)setUpButtons
@@ -62,12 +63,17 @@
     if (data.isQuestion) {
         self.voteButton.hidden = NO;
         self.shareButton.hidden =NO;
+        if (data.voted) {
+            [self setButtonVotedWithScore:data.voteScore];
+        } else {
+            [self setVoteButtonScore:data.voteScore];
+        }
+        
     } else {
         self.voteButton.hidden = YES;
         self.shareButton.hidden = YES;
     }
     [self.avatarImageView setImage:[UIImage imageNamed:data.author]];
-    [self setVoteButtonScore:data.voteScore];
     self.textId = data.textId;
 }
 
@@ -92,8 +98,20 @@
     [self.voteButton setTitle:[NSString stringWithFormat:@"%ld", score] forState:UIControlStateNormal];
     // Call Post API for vote
     [[DataManager sharedInstance] voteWithAuthor:kAuthor messageId:self.textId];
+}
+
+- (void)setButtonVotedWithScore:(NSString *)score{
+    if (score.length == 0){
+        self.voteButton.hidden = YES;
+    } else {
+        self.voteButton.hidden = NO;
+        [self.voteButton setBackgroundColor:[UIColor colorWithHex:kYahooLightPurple]];
+        [self.voteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.voteButton setTitle:score forState:UIControlStateNormal];
+    }
     
 }
+
 
 - (IBAction)didTapOnShareButton:(id)sender {
     NSLog(@"s");

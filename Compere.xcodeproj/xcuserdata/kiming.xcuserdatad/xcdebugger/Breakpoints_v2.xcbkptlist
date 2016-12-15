@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Compere/InputViewController.m"
-            timestampString = "503458364.193082"
+            timestampString = "503459269.043461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187">
+            startingLineNumber = "186"
+            endingLineNumber = "186">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -23,13 +23,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Compere/InputViewController.m"
-            timestampString = "503458364.193082"
+            filePath = "Compere/MessageCollectionViewCell.m"
+            timestampString = "503460145.23208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-didReceiveMemoryWarning"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-populateCellWithData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

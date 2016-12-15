@@ -58,7 +58,9 @@ NSURLConnectionDelegate
     NSString *text = self.textField.text;
     if (text && text.length) {
         if (self.delegate) {
-            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[self isAQuestion:text] voteScore:@"0" textId:@""];
+            BOOL isQ = [self isAQuestion:text];
+            NSString *score = isQ ? @"0":@"";
+            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:isQ voteScore:score textId:@"" voted:0];
             [self.delegate onUserPostMessage:message];
         }
         NSString *type = [self isAQuestion:text] ? @"q" : @"c";
@@ -86,15 +88,12 @@ NSURLConnectionDelegate
                     rect.size.height = self.suggestions.count * kCellHeight;
                     rect.origin.y = 0;//-rect.size.height;
                     self.collectionView.frame = rect;
-                    
-                    NSLog(@">>%f", self.view.frame.origin.y);
+
                     CGRect inputViewFrame = self.view.frame;
                     inputViewFrame.origin.y = ([UIScreen mainScreen].bounds.size.height - kOFFSET_FOR_KEYBOARD)- kInputViewHeight - rect.size.height;
                     inputViewFrame.size.height = kInputViewHeight + rect.size.height;
                     
                     [self.view setFrame:inputViewFrame];
-                    NSLog(@">>>%f", self.view.frame.origin.y);
-                    NSLog(@">>>%f", self.view.frame.size.height);
                     if (self.collectionView.isHidden) {
                         [self.collectionView setHidden:NO];
                     }

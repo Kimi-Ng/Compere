@@ -15,9 +15,10 @@
 @property (strong, nonatomic) NSString *avatarImage;
 @property (strong, nonatomic) NSString *content;
 @property (assign, nonatomic) BOOL isQuestion;
+@property (assign, nonatomic) BOOL voted;
 @property (strong, nonatomic) NSString *voteScore;
 
-- (instancetype)initWithAuthor:(NSString *)author content:(NSString *)content isQuestion:(BOOL)isQuestion voteScore:(NSString *)voteScore textId:(NSString *)textId;
+- (instancetype)initWithAuthor:(NSString *)author content:(NSString *)content isQuestion:(BOOL)isQuestion voteScore:(NSString *)voteScore textId:(NSString *)textId voted:(BOOL)voted;
 
 //TODO: add more properties for api
 

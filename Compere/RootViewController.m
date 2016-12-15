@@ -157,6 +157,7 @@ static NSString const *kTabBarTintColor = @"0x8300FF";
 #pragma mark - InputViewControllerProtocol
 - (void)onUserPostMessage:(MessageDataObject*)message
 {
+
     [[DataManager sharedInstance].allContentMockDataList addObject:message];
     [self.tabBarController.commentViewController refreshContentWithReload:NO];
     if (message.isQuestion) {

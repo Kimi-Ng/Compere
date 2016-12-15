@@ -16,7 +16,7 @@
 
 + (DataManager *)sharedInstance;
 
-- (void)applyMockData; // for testing
+//- (void)applyMockData; // for testing
 
 
 //- (void)getTopQuestionsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
