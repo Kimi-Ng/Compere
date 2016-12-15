@@ -39,6 +39,7 @@
     self.voteButton.hidden = YES;
     self.voteButton.userInteractionEnabled = YES;
     [self.voteButton setBackgroundColor:[UIColor whiteColor]];
+    [self.voteButton setTitleColor:[UIColor colorWithHex:kYahooLightPurple] forState:UIControlStateNormal];
     
 }
 

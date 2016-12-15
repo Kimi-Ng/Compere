@@ -9,7 +9,7 @@
 #import "DataManager.h"
 #import "MessageDataObject.h"
 
-static NSString * const kHostUrl = @"http://localhost:8080/";
+static NSString * const kHostUrl = @"http://192.168.2.1:8080/";
 
 @interface DataManager()
 
@@ -77,7 +77,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
 - (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion
 {
     
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/all?author=%@", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/all?author=%@", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
@@ -160,7 +160,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     
     // Start the first service
     dispatch_group_enter(serviceGroup);
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/top?author=%@&type=q", author];
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/top?author=%@&type=q", author];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
@@ -180,7 +180,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     
     // Start the second service
     dispatch_group_enter(serviceGroup);
-    requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/recent?author=%@&type=q", author];
+    requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/recent?author=%@&type=q", author];
     requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
@@ -212,7 +212,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
 
 - (void)getSimilarWithText:(NSString*)text completion:(void (^)(NSArray *))completion
 {
-    NSString *requestUrlString = [NSString stringWithFormat:@"http://localhost:8080/similar?text=%@", text];
+    NSString *requestUrlString = [NSString stringWithFormat:@"http://192.168.2.1:8080/similar?text=%@", text];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {
@@ -237,7 +237,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
 
 - (void)getSentimentWithCompletion:(void (^)(NSUInteger))completion
 {
-    NSString *requestUrlString = @"http://localhost:8080/sentiment";
+    NSString *requestUrlString = @"http://192.168.2.1:8080/sentiment";
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!data) {

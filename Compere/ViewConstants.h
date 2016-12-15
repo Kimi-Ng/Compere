@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, TabBarType){
     TabBarQuestion,
     TabBarCounts
 };
-
+//localhost or 192.168.2.1
 #define kVideoWidth [UIScreen mainScreen].bounds.size.width
 #define kVideoHeight 170
 //[UIScreen mainScreen].bounds.size.width/2 - 17
@@ -24,6 +24,6 @@ typedef NS_ENUM(NSUInteger, TabBarType){
 #define kMessageCollectionViewCellIdentifier @"MessageCollectionViewCell"
 #define kQuestionSectionCellIdentifier @"QuestionSectionCell"
 #define kInputViewHeight 40
-#define kAuthor @"Guest"
+#define kAuthor @"guest-3"
 
 @end

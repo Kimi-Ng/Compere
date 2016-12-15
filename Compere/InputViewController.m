@@ -16,7 +16,7 @@
 static CGFloat const kCellHeight = 38.f;
 static CGFloat const kHorizontalMargin = 10.f;
 
-static NSString * const kSimilarApiUrl = @"http://localhost:8080/similar?text=%@";
+static NSString * const kSimilarApiUrl = @"http://192.168.2.1m%:8080/similar?text=%@";
 
 @interface InputViewController ()
 <
@@ -86,7 +86,15 @@ NSURLConnectionDelegate
                     self.suggestions = @[];
                     [self.collectionView setHidden:YES];
                 } else {
-                    self.suggestions = dataArray;
+                    NSMutableArray *filteredDataArr = [[NSMutableArray alloc] init];
+                    for (MessageDataObject *obj in dataArray) {
+                        if (obj.isQuestion) {
+                            [filteredDataArr addObject:obj];
+                        }
+                    }
+                
+                
+                    self.suggestions = filteredDataArr;
                     CGRect rect = self.collectionView.frame;
                     rect.size.height = self.suggestions.count * kCellHeight;
                     rect.origin.y = 0;//-rect.size.height;
