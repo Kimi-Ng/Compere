@@ -11,7 +11,7 @@
 
 @interface VideoViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *sentimentImageView;
-
+@property (nonatomic) NSArray *sentimentMap;
 @end
 
 @implementation VideoViewController
@@ -19,7 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [NSTimer scheduledTimerWithTimeInterval:5.0
+    self.sentimentMap = @[@"vsad",
+                          @"vsad",
+                          @"sad2",
+                          @"sad2",
+                          @"neutral",
+                          @"neutral",
+                          @"happy2",
+                          @"happy2",
+                          @"vhappy",
+                          @"vhappy",
+                          @"vhappy"];
+    [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(reflectUserSentiment)
                                    userInfo:nil
@@ -34,11 +45,13 @@
 - (void)reflectUserSentiment
 {
     [[DataManager sharedInstance] getSentimentWithCompletion:^(NSUInteger sentiment) {
-        if (sentiment < 5) {
-            [self.sentimentImageView setImage:[UIImage imageNamed:@"sad_black"]];
-        } else {
-            [self.sentimentImageView setImage:[UIImage imageNamed:@"happy_yellow"]];
-        }
+        NSString *imageName = self.sentimentMap[sentiment];
+        [self.sentimentImageView setImage:[UIImage imageNamed:imageName]];
+//        if (sentiment < 5) {
+//            [self.sentimentImageView setImage:[UIImage imageNamed:@"sad_black"]];
+//        } else {
+//            [self.sentimentImageView setImage:[UIImage imageNamed:@"happy_yellow"]];
+//        }
     }];
 }
 
