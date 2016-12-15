@@ -57,14 +57,16 @@ NSURLConnectionDelegate
 - (IBAction)onPostTapped:(id)sender {
     NSString *text = self.textField.text;
     if (text && text.length) {
-        if (self.delegate) {
-            BOOL isQ = [self isAQuestion:text];
-            NSString *score = isQ ? @"0":@"";
-            MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:isQ voteScore:score textId:@"" voted:0];
-            [self.delegate onUserPostMessage:message];
-        }
         NSString *type = [self isAQuestion:text] ? @"q" : @"c";
-        [[DataManager sharedInstance] postWithAuthor:kAuthor text:text type:type];
+        __weak typeof(self) weakSelf = self;
+        [[DataManager sharedInstance] postWithAuthor:kAuthor text:text type:type completion:^(NSString *messageId) {
+            typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf.delegate) {
+                NSString *voteScore = [type isEqualToString:@"q"] ? @"0" : @"";
+                MessageDataObject *message = [[MessageDataObject alloc] initWithAuthor:kAuthor content:text isQuestion:[strongSelf isAQuestion:text] voteScore:voteScore textId:messageId voted:NO];
+                [strongSelf.delegate onUserPostMessage:message];
+            }
+        }];
     }
     
     [self.collectionView setHidden:YES];
