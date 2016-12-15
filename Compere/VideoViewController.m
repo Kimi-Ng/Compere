@@ -35,9 +35,9 @@
 {
     [[DataManager sharedInstance] getSentimentWithCompletion:^(NSUInteger sentiment) {
         if (sentiment < 5) {
-            [self.sentimentImageView setImage:[UIImage imageNamed:@"guest-2"]];
+            [self.sentimentImageView setImage:[UIImage imageNamed:@"sad_black"]];
         } else {
-            [self.sentimentImageView setImage:[UIImage imageNamed:@"guest-4"]];
+            [self.sentimentImageView setImage:[UIImage imageNamed:@"happy_yellow"]];
         }
     }];
 }
