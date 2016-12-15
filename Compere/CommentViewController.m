@@ -25,7 +25,7 @@
     [self setUpCollectionView];
     //[[DataManager sharedInstance] applyMockData];
     
-    [NSTimer scheduledTimerWithTimeInterval:3.0
+    [NSTimer scheduledTimerWithTimeInterval:30.0
                                      target:self
                                    selector:@selector(regularIntervalReload)
                                    userInfo:nil
@@ -76,9 +76,7 @@
 {
     if (reload) {
         [[DataManager sharedInstance] getCommentsWithAuthor:kAuthor completion:^(NSArray *dataArray) {
-            if (self.currentCount != dataArray.count) {
-                [self.collectionView reloadData];
-            }
+            [self.collectionView reloadData];
         }];
     } else {
         [self.collectionView reloadData];
@@ -87,7 +85,6 @@
 
 - (void)regularIntervalReload
 {
-    self.currentCount = [DataManager sharedInstance].allContentMockDataList.count;
     [self refreshContentWithReload:YES];
 }
 

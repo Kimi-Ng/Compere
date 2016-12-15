@@ -25,7 +25,7 @@
 - (void)getCommentsWithAuthor:(NSString *)author completion:(void (^)(NSArray *))completion;
 - (void)getSimilarWithText:(NSString*)text completion:(void (^)(NSArray *))completion;
 - (void)getSentimentWithCompletion:(void (^)(NSUInteger))completion;
-- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type;
+- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type completion:(void (^)(NSString *))completion;
 - (void)voteWithAuthor:(NSString *)author messageId:(NSString *)messageId;
 
 @end

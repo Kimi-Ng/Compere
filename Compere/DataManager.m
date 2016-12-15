@@ -29,7 +29,7 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     return sharedInstance;
 }
 
-- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type
+- (void)postWithAuthor:(NSString *)author text:(NSString *)text type:(NSString*)type completion:(void (^)(NSString *))completion
 {
     if (!author || !author.length || !text || !text.length) {
         return;
@@ -44,7 +44,11 @@ static NSString * const kHostUrl = @"http://localhost:8080/";
     [request setHTTPBody:postData];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSString *messageId = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"postWithAuthor: %@  %@",messageId,error);
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(messageId);
+            });
+        }
     }] resume];
 }
 
