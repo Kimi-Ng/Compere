@@ -37,6 +37,8 @@
 - (void)prepareForReuse
 {
     self.voteButton.hidden = NO;
+    self.voteButton.userInteractionEnabled = YES;
+    [self.voteButton setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)setUpButtons
